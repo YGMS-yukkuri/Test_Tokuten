@@ -23,6 +23,9 @@ input {
     align-items: center;
     gap: 10px;
 }
+.button {
+    margin: 2%;
+}
 
 .input {
     display: flex;
@@ -50,5 +53,27 @@ th,td{
 }
 
 .title {
-    background-color: rgb(201, 233, 235);
+    background-color: oklch(90% 0.035 200);
+}
+
+.rows {
+    background-color: oklch(90% 0.035 240);
+}
+
+.subject {
+    width: 30%;
+    overflow: visible;
+}
+
+.score,
+.avg {
+    width: 3em;
+}
+
+.gap {
+    width: 2em;
+}
+
+.date {
+    width: 10em;
 }
