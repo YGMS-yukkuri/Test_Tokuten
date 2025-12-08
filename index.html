@@ -1,28 +1,56 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <main>
         <div class="inputBox">
-            <label for="subject">教科を入力</label>
-            <input type="text" name="subject" class="scoreInput" id="subject">
-            <label for="score">得点を入力</label>
-            <input type="number" name="score" class="scoreInput" id="score">
-            <label for="avgscore">平均点を入力</label>
-            <input type="number" name="avg" class="scoreInput" id="avgscore">
+            <div class="input">
+                <label for="subject">教科を入力</label>
+                <input type="text" name="subject" class="scoreInput" id="subject">
+                <label for="score">得点を入力</label>
+                <input type="number" name="score" class="scoreInput" id="score">
+                <label for="avgscore">平均点を入力</label>
+                <input type="number" name="avg" class="scoreInput" id="avgscore">
+            </div>
+            <div class="button">
+                <button type="button" onclick="register()">データを登録</button>
+            </div>
         </div>
         <div class="tableBox">
-            <div></div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col" class="title">教科</th>
+                        <th scope="col" class="title">得点</th>
+                        <th scope="col" class="title">平均点</th>
+                        <th scope="col" class="title">差分</th>
+                        <th scope="col" class="title">登録日時</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="data">
+                        <th scope="row" class="title">言語文化</th>
+                        <td>60</td>
+                        <td>55</td>
+                        <td>+5</td>
+                        <td>2025/99/99</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <div></div>
     </main>
     <footer>
 
     </footer>
+    <script src="script.js"></script>
 </body>
+
 </html>
