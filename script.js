@@ -19,6 +19,7 @@ function register() {
         subjectBox.value = "";
         return;
     }
+    if(!subject || !score) return;
 
     score = Number(score);
     avgscore = Number(avgscore);
