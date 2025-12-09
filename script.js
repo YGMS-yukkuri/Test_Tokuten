@@ -14,23 +14,28 @@ function register() {
     score = scoreBox.value;
     avgscore = avgscoreBox.value;
 
-    if(subject.length >= 10){
+    if (subject.length >= 10) {
         alert("教科名が長すぎます");
         subjectBox.value = "";
         return;
     }
-    if(!subject || !score) return;
+    if (!subject || !score) return;
 
     score = Number(score);
-    avgscore = Number(avgscore);
-    gapscore = score - avgscore;
+    if (!avgscore) {
+        avgscore = "なし";
+    }
+    else {
+        avgscore = Number(avgscore);
+        gapscore = score - avgscore;
+    }
 
     const tr = document.createElement("tr");
     tr.classList.add("data");
 
     const th = document.createElement("th");
     th.scope = "row";
-    th.classList.add("rows","subject");
+    th.classList.add("rows", "subject");
     th.textContent = subject;
 
     const tdScore = document.createElement("td");
@@ -42,7 +47,7 @@ function register() {
     tdAverage.textContent = String(avgscore);
 
     const tdGap = document.createElement("td");
-    if(gapscore > 0){
+    if (gapscore > 0) {
         gapscore = `+${String(gapscore)}`
     }
     tdGap.classList.add("gap");
