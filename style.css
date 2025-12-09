@@ -13,7 +13,7 @@ main {
 }
 
 input {
-    width: 15%;
+    width: 50%;
     height: 100%;
 }
 
@@ -40,7 +40,7 @@ input {
 
 .input {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     margin-top: 5%;
     gap: 10px;
 }

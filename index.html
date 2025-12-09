@@ -12,12 +12,18 @@
     <main>
         <div class="inputBox">
             <div class="input">
-                <label for="subject">教科を入力</label>
-                <input type="text" name="subject" class="scoreInput" id="subject">
-                <label for="score">得点を入力</label>
-                <input type="number" name="score" class="scoreInput" id="score">
-                <label for="avgscore">平均点を入力</label>
-                <input type="number" name="avg" class="scoreInput" id="avgscore">
+                <div>
+                    <label for="subject">教科を入力</label>
+                    <input type="text" class="scoreInput" id="subject">
+                </div>
+                <div>
+                    <label for="score">得点を入力</label>
+                    <input type="number" class="scoreInput" id="score" min="0">
+                </div>
+                <div>
+                    <label for="avgscore">平均点を入力</label>
+                    <input type="number" class="scoreInput" id="avgscore" min="0">
+                </div>
             </div>
             <div class="button">
                 <button type="button" onclick="register()">データを登録</button>
