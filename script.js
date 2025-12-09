@@ -30,19 +30,22 @@ function register() {
 
     const th = document.createElement("th");
     th.scope = "row";
-    th.classList.add("rows")
+    th.classList.add("rows","subject");
     th.textContent = subject;
 
     const tdScore = document.createElement("td");
+    tdScore.classList.add("score");
     tdScore.textContent = String(score);
 
     const tdAverage = document.createElement("td");
+    tdAverage.classList.add("avg");
     tdAverage.textContent = String(avgscore);
 
     const tdGap = document.createElement("td");
     if(gapscore > 0){
         gapscore = `+${String(gapscore)}`
     }
+    tdGap.classList.add("gap");
     tdGap.textContent = gapscore;
 
     const tdTime = document.createElement("td");
@@ -53,6 +56,7 @@ function register() {
         month: "2-digit",
         day: "2-digit"
     })
+    tdTime.classList.add("date");
     tdTime.textContent = nowJST;
 
     tr.appendChild(th);
