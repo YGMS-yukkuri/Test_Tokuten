@@ -1,6 +1,7 @@
 const subjectBox = document.getElementById("subject");
 const scoreBox = document.getElementById("score");
 const avgscoreBox = document.getElementById("avgscore");
+const editSubjectBox = document.getElementById("editSubject");
 
 const tbody = document.querySelector(".tbody");
 
@@ -71,4 +72,63 @@ function register() {
     tr.appendChild(tdTime);
 
     tbody.appendChild(tr);
+};
+
+function search() {
+    const allSubject = document.querySelectorAll(".subject");
+    const allScore = document.querySelectorAll(".score");
+    const allAvg = document.querySelectorAll(".avg");
+    const allGap = document.querySelectorAll(".gap");
+    const allDate = document.querySelectorAll(".date");
+
+    console.log(allSubject);
+
+    allSubject.forEach((element, index) => {
+        if (element.textContent == editSubjectBox.value) {
+            const prevScore = Number(allScore[index].textContent);
+            const prevAvg = Number(allAvg[index].textContent);
+            const prevGap = Number(allGap[index].textContent);
+            const prevDate = Number(allDate[index].textContent);
+
+            const EditBox = document.createElement("div");
+            EditBox.style.display = "flex";
+            EditBox.style.flexDirection = "column";
+            EditBox.style.justifyContent = "center";
+            EditBox.style.alignItems = "center";
+            EditBox.style.width = "80dvw";
+            EditBox.style.height = "50dvh";
+            EditBox.style.transform = "translate(-50%,-50%)";
+            EditBox.style.position = "fixed";
+            EditBox.style.top = "50%";
+            EditBox.style.left = "50%";
+
+            const EditDiv = document.createElement("div");
+
+            
+            const EditScoreLabel = document.createElement("label");
+            EditScoreLabel.textContent = "得点を入力";
+            EditScoreLabel.htmlFor = "EditScoreInput";
+
+            const EditScore = document.createElement("input");
+            EditScore.type = "number";
+            EditScore.id = "EditScoreInput"
+            EditScore.defaultValue = prevScore;
+
+            const EditAvgLabel = document.createElement("label");
+            EditAvgLabel.textContent = "平均点を入力";
+            EditAvgLabel.htmlFor = "EditAvgInput";
+
+            const EditAvg = document.createElement("input");
+            EditAvg.type = "number";
+            EditAvg.id = "EditAvgInput";
+            EditAvg.defaultValue = prevAvg;
+
+            EditDiv.appendChild(EditScoreLabel);
+            EditDiv.appendChild(EditScore);
+            EditDiv.appendChild(EditAvgLabel);
+            EditDiv.appendChild(EditAvg);
+        }
+    })
+
+
 }
