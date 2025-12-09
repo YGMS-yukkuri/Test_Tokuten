@@ -48,7 +48,7 @@ input {
 
 .tableBox {
     margin-top: 2%;
-    width: 80%;
+    width: 40%;
     height: 90%;
 }
 
@@ -87,4 +87,10 @@ th,td{
 
 .date {
     width: 10em;
+}
+
+.center {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
