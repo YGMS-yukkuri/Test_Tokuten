@@ -1,7 +1,6 @@
 const subjectBox = document.getElementById("subject");
 const scoreBox = document.getElementById("score");
 const avgscoreBox = document.getElementById("avgscore");
-const SearchSubjectBox = document.getElementById("editSubject");
 
 const tbody = document.querySelector(".tbody");
 
@@ -12,17 +11,18 @@ let gapscore;
 let editingIndex = null;
 
 function register() {
+    
     subject = subjectBox.value;
     score = scoreBox.value;
     avgscore = avgscoreBox.value;
-
+    
     if (subject.length >= 10) {
         alert("教科名が長すぎます");
         subjectBox.value = "";
         return;
     }
     if (!subject || !score) return;
-
+    
     score = Number(score);
     if (!avgscore) {
         avgscore = "なし";
@@ -31,30 +31,30 @@ function register() {
         avgscore = Number(avgscore);
         gapscore = score - avgscore;
     }
-
+    
     const tr = document.createElement("tr");
     tr.classList.add("data");
-
+    
     const th = document.createElement("th");
     th.scope = "row";
     th.classList.add("rows", "subject");
     th.textContent = subject;
-
+    
     const tdScore = document.createElement("td");
     tdScore.classList.add("score");
     tdScore.textContent = String(score);
-
+    
     const tdAverage = document.createElement("td");
     tdAverage.classList.add("avg");
     tdAverage.textContent = String(avgscore);
-
+    
     const tdGap = document.createElement("td");
     if (gapscore > 0) {
         gapscore = `+${String(gapscore)}`
     }
     tdGap.classList.add("gap");
     tdGap.textContent = gapscore;
-
+    
     const tdTime = document.createElement("td");
     const nowTime = new Date();
     const nowJST = nowTime.toLocaleString("ja-jp", {
@@ -65,18 +65,19 @@ function register() {
     })
     tdTime.classList.add("date");
     tdTime.textContent = nowJST;
-
+    
     tr.appendChild(th);
     tr.appendChild(tdScore);
     tr.appendChild(tdAverage);
     tr.appendChild(tdGap);
     tr.appendChild(tdTime);
-
+    
     tbody.appendChild(tr);
-
+    
     subjectBox.value = "";
     scoreBox.value = "";
     avgscoreBox.value = "";
+    UpdateEditDiv();
 };
 
 function search() {
@@ -85,8 +86,10 @@ function search() {
     const allAvg = document.querySelectorAll(".avg");
     const allGap = document.querySelectorAll(".gap");
     const allDate = document.querySelectorAll(".date");
-
+    
     console.log(allSubject);
+    
+    const SearchSubjectBox = document.getElementById("editSubject");
 
     allSubject.forEach((element, index) => {
         if (element.textContent == SearchSubjectBox.value) {
@@ -237,4 +240,47 @@ function Editing() {
     if (EditingUI) {
         EditingUI.remove();
     }
+
+    UpdateEditDiv();
 };
+
+function CreateEditdiv() {
+    const allSubject = document.querySelectorAll(".subject");
+    const editBox = document.querySelector(".editBox");
+
+    const editInput = document.createElement("div");
+    editInput.classList.add("editInput");
+
+    const editSubjectLabel = document.createElement("label");
+    editSubjectLabel.htmlFor = "editSubject";
+    editSubjectLabel.textContent = "データを編集する教科を選択";
+
+    const editSubjectSelector = document.createElement("select");
+    editSubjectSelector.id = "editSubject";
+
+    const SubmitButton = document.createElement("button");
+    SubmitButton.textContent = "選択"
+    SubmitButton.type = "button";
+    SubmitButton.onclick = () => search();
+
+    allSubject.forEach(element => {
+        const editSubjectOptions = document.createElement("option");
+        editSubjectOptions.textContent = element.textContent;
+        editSubjectOptions.value = element.textContent;
+        editSubjectSelector.appendChild(editSubjectOptions);
+    });
+
+    editInput.appendChild(editSubjectLabel);
+    editInput.appendChild(editSubjectSelector);
+    editInput.appendChild(SubmitButton);
+
+    editBox.appendChild(editInput);
+}
+
+function UpdateEditDiv() {
+    const editInput = document.querySelector(".editInput");
+    editInput.remove();
+    CreateEditdiv();
+}
+
+CreateEditdiv();

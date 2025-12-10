@@ -46,15 +46,61 @@ main {
     gap: 10px;
 }
 
+.center {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
 
 .tableBox {
-    margin-top: 2%;
     width: 40%;
-    height: 90%;
+    height: 100%;
+}
+
+.editBox {
+    width: 40%;
+    display: flex;
+    justify-content: center;
+}
+
+.editInput {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 10px;
+    border: 1px solid #000;
+    background-color: oklch(90% 0.035 200);
+    gap: 10px;
+}
+
+.editInput select,
+.editInput button {
+    height: 2.5em;
+}
+
+.editInput select {
+    background-color: oklch(90% 0.035 240);
+    border: solid 2px #000;
+    width: 30%;
+    text-align: center;
+    border-radius: 100px;
+    color: #000;
+}
+
+.editInput button {
+    background-color: oklch(90% 0.035 240);
+    border: solid 2px #000;
+    width: 10%;
+    border-radius: 100px;
+    color: #000;
 }
 
 .table {
     border: 1px solid #000;
+    width: 80%;
+    margin: auto;
 }
 
 th,
