@@ -29,29 +29,37 @@
                 <button type="button" onclick="register()">データを登録</button>
             </div>
         </div>
-        <div class="tableBox">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col" class="title subject">教科</th>
-                        <th scope="col" class="title score">得点</th>
-                        <th scope="col" class="title avg">平均点</th>
-                        <th scope="col" class="title gap">差分</th>
-                        <th scope="col" class="title date">登録日時</th>
-                    </tr>
-                </thead>
-                <tbody class="tbody">
-                    <tr class="data">
-                        <th scope="row" class="rows subject">言語文化</th>
-                        <td>60</td>
-                        <td>55</td>
-                        <td>+5</td>
-                        <td>2025/99/99</td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="center">
+            <div class="tableBox">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="title">教科</th>
+                            <th scope="col" class="title">得点</th>
+                            <th scope="col" class="title">平均点</th>
+                            <th scope="col" class="title">差分</th>
+                            <th scope="col" class="title">登録/編集日時</th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody">
+                        <tr class="data">
+                            <th scope="row" class="rows subject">言語文化</th>
+                            <td class="score">60</td>
+                            <td class="avg">55</td>
+                            <td class="gap">+5</td>
+                            <td class="date">2025/99/99</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="editBox">
+                <div class="editInput">
+                    <label for="editSubject">データを編集する教科を入力</label>
+                    <input type="text" id="editSubject">
+                    <button type="button" onclick="search()">参照</button>
+                </div>
+            </div>
         </div>
-        <div></div>
     </main>
     <footer>
 
