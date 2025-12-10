@@ -9,6 +9,7 @@ let subject;
 let score;
 let avgscore;
 let gapscore;
+let editingIndex = null;
 
 function register() {
     subject = subjectBox.value;
@@ -72,6 +73,10 @@ function register() {
     tr.appendChild(tdTime);
 
     tbody.appendChild(tr);
+
+    subjectBox.value = "";
+    scoreBox.value = "";
+    avgscoreBox.value = "";
 };
 
 function search() {
@@ -90,8 +95,10 @@ function search() {
             const prevAvg = Number(allAvg[index].textContent);
             const prevGap = Number(allGap[index].textContent);
             const prevDate = Number(allDate[index].textContent);
+            editingIndex = index;
 
             const EditBox = document.createElement("div");
+            EditBox.classList.add("editing")
             EditBox.style.display = "flex";
             EditBox.style.flexDirection = "column";
             EditBox.style.justifyContent = "center";
@@ -113,7 +120,7 @@ function search() {
             EditDiv.style.alignItems = "center";
             EditDiv.style.backgroundColor = "rgba(255, 210, 210, 1)"
             EditDiv.style.border = "1px solid #000"
-            
+
 
             const EditSubjectLabel = document.createElement("label");
             EditSubjectLabel.textContent = `教科を入力(編集前:${prevSubject})`;
@@ -144,7 +151,7 @@ function search() {
 
             const SubmitButton = document.createElement("button");
             SubmitButton.onclick = () => Editing();
-            SubmitButton.textContent = "修正";
+            SubmitButton.textContent = "データを修正";
 
             EditDiv.appendChild(EditSubjectLabel);
             EditDiv.appendChild(EditSubject);
@@ -162,6 +169,72 @@ function search() {
 
 }
 
-function Editing(){
-    console.log("OK");
+function Editing() {
+    if (editingIndex == null) return;
+
+    const allSubject = document.querySelectorAll(".subject");
+    const allScore = document.querySelectorAll(".score");
+    const allAvg = document.querySelectorAll(".avg");
+    const allGap = document.querySelectorAll(".gap");
+    const allDate = document.querySelectorAll(".date");
+
+    const newSubjectInput = document.querySelector("#EditSubjectInput");
+    const newScoreInput = document.querySelector("#EditScoreInput");
+    const newAvgInput = document.querySelector("#EditAvgInput");
+
+    let editedPrams;
+
+    if (newSubjectInput.value.length > 10) {
+        alert("教科名が長すぎます");
+        return;
+    }
+
+    const nowTime = new Date();
+    const nowJST = nowTime.toLocaleString("ja-jp", {
+        timeZone: "Asia/Tokyo",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit"
+    })
+
+    if (!newAvgInput.value) {
+        editedPrams = {
+            Subject: newSubjectInput.value,
+            Score: Number(newScoreInput.value),
+            Avg: "なし",
+            Gap: "",
+            Date: nowJST
+        }
+    } else {
+        Gap = Number(newScoreInput.value) - Number(newAvgInput.value);
+        if (Gap > 0) {
+            editedPrams = {
+                Subject: newSubjectInput.value,
+                Score: Number(newScoreInput.value),
+                Avg: Number(newAvgInput.value),
+                Gap: `+${Gap}`,
+                Date: nowJST
+            }
+        }
+        else {
+            editedPrams = {
+                Subject: newSubjectInput.value,
+                Score: Number(newScoreInput.value),
+                Avg: Number(newAvgInput.value),
+                Gap: Number(newScoreInput.value) - Number(newAvgInput.value),
+                Date: nowJST
+            }
+        }
+    }
+
+    allSubject[editingIndex].textContent = editedPrams.Subject;
+    allScore[editingIndex].textContent = editedPrams.Score;
+    allAvg[editingIndex].textContent = editedPrams.Avg;
+    allGap[editingIndex].textContent = editedPrams.Gap;
+    allDate[editingIndex].textContent = editedPrams.Date;
+
+    const EditingUI = document.querySelector(".editing");
+    if (EditingUI) {
+        EditingUI.remove();
+    }
 };
