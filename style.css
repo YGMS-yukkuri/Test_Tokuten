@@ -12,7 +12,7 @@ main {
     align-items: center;
 }
 
-input {
+.inputBox input {
     width: 50%;
     height: 100%;
 }
@@ -23,6 +23,7 @@ input {
     align-items: center;
     gap: 10px;
 }
+
 .button {
     margin: 2%;
     width: 30%;
@@ -56,7 +57,8 @@ input {
     border: 1px solid #000;
 }
 
-th,td{
+th,
+td {
     border: #000 1px solid;
     margin: 5px;
     text-align: center;
