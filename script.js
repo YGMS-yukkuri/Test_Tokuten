@@ -11,7 +11,6 @@ let gapscore;
 let editingIndex = null;
 
 function register() {
-    
     subject = subjectBox.value;
     score = scoreBox.value;
     avgscore = avgscoreBox.value;
@@ -86,8 +85,6 @@ function search() {
     const allAvg = document.querySelectorAll(".avg");
     const allGap = document.querySelectorAll(".gap");
     const allDate = document.querySelectorAll(".date");
-    
-    console.log(allSubject);
     
     const SearchSubjectBox = document.getElementById("editSubject");
 
@@ -168,8 +165,6 @@ function search() {
             document.querySelector("main").appendChild(EditBox);
         }
     })
-
-
 }
 
 function Editing() {
