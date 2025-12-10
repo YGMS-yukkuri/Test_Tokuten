@@ -165,7 +165,7 @@ function search() {
             document.querySelector("main").appendChild(EditBox);
         }
     })
-}
+};
 
 function Editing() {
     if (editingIndex == null) return;
@@ -270,12 +270,12 @@ function CreateEditdiv() {
     editInput.appendChild(SubmitButton);
 
     editBox.appendChild(editInput);
-}
+};
 
 function UpdateEditDiv() {
     const editInput = document.querySelector(".editInput");
     editInput.remove();
     CreateEditdiv();
-}
+};
 
 CreateEditdiv();
