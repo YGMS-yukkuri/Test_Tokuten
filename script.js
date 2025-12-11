@@ -325,5 +325,5 @@ function Load() {
     });
 };
 
-Load();
 CreateEditdiv();
+Load();
