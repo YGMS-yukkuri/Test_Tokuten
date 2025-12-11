@@ -8,20 +8,37 @@ let subject;
 let score;
 let avgscore;
 let gapscore;
+let nowJST;
 let editingIndex = null;
 
-function register() {
-    subject = subjectBox.value;
-    score = scoreBox.value;
-    avgscore = avgscoreBox.value;
-    
+function register(Lsubject, Lscore, Lavg, Ldate) {
+    if (Lsubject) {
+        subject = Lsubject;
+        score = Lscore;
+        avgscore = Lavg;
+        nowJST = Ldate;
+    } else {
+        subject = subjectBox.value;
+        score = scoreBox.value;
+        avgscore = avgscoreBox.value;
+        const nowTime = new Date();
+        nowJST = nowTime.toLocaleString("ja-jp", {
+            timeZone: "Asia/Tokyo",
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit"
+        })
+    }
+
+
+
     if (subject.length >= 10) {
         alert("教科名が長すぎます");
         subjectBox.value = "";
         return;
     }
     if (!subject || !score) return;
-    
+
     score = Number(score);
     if (!avgscore) {
         avgscore = "なし";
@@ -30,53 +47,48 @@ function register() {
         avgscore = Number(avgscore);
         gapscore = score - avgscore;
     }
-    
+
     const tr = document.createElement("tr");
     tr.classList.add("data");
-    
+
     const th = document.createElement("th");
     th.scope = "row";
     th.classList.add("rows", "subject");
     th.textContent = subject;
-    
+
     const tdScore = document.createElement("td");
     tdScore.classList.add("score");
     tdScore.textContent = String(score);
-    
+
     const tdAverage = document.createElement("td");
     tdAverage.classList.add("avg");
     tdAverage.textContent = String(avgscore);
-    
+
     const tdGap = document.createElement("td");
     if (gapscore > 0) {
         gapscore = `+${String(gapscore)}`
     }
     tdGap.classList.add("gap");
     tdGap.textContent = gapscore;
-    
+
     const tdTime = document.createElement("td");
-    const nowTime = new Date();
-    const nowJST = nowTime.toLocaleString("ja-jp", {
-        timeZone: "Asia/Tokyo",
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit"
-    })
     tdTime.classList.add("date");
     tdTime.textContent = nowJST;
-    
+
     tr.appendChild(th);
     tr.appendChild(tdScore);
     tr.appendChild(tdAverage);
     tr.appendChild(tdGap);
     tr.appendChild(tdTime);
-    
+
     tbody.appendChild(tr);
-    
+
     subjectBox.value = "";
     scoreBox.value = "";
     avgscoreBox.value = "";
+
     UpdateEditDiv();
+    Saving();
 };
 
 function search() {
@@ -85,7 +97,7 @@ function search() {
     const allAvg = document.querySelectorAll(".avg");
     const allGap = document.querySelectorAll(".gap");
     const allDate = document.querySelectorAll(".date");
-    
+
     const SearchSubjectBox = document.getElementById("editSubject");
 
     allSubject.forEach((element, index) => {
@@ -237,6 +249,7 @@ function Editing() {
     }
 
     UpdateEditDiv();
+    Saving();
 };
 
 function CreateEditdiv() {
@@ -278,4 +291,39 @@ function UpdateEditDiv() {
     CreateEditdiv();
 };
 
+function Saving() {
+    const subjectElems = document.querySelectorAll(".subject");
+    const scoreElems = document.querySelectorAll(".score");
+    const avgElems = document.querySelectorAll(".avg");
+    const dateElems = document.querySelectorAll(".date");
+    
+    const data = [];
+    subjectElems.forEach((elem, idx) => {
+        data.push({
+            subject: elem.textContent,
+            score: scoreElems[idx].textContent,
+            avg: avgElems[idx].textContent,
+            date: dateElems[idx].textContent
+        })
+    })
+    localStorage.setItem("Datas", JSON.stringify(data));
+    console.log(JSON.parse(localStorage.getItem("Datas")));
+};
+
+function Load() {
+    const Datas = localStorage.getItem("Datas");
+    if (!Datas) return;
+
+    const DatasJSON = JSON.parse(Datas);
+    DatasJSON.forEach(elem => {
+        Loadsubject = elem.subject;
+        Loadscore = elem.score;
+        Loadavg = elem.avg;
+        Loaddate = elem.date;
+
+        register(Loadsubject, Loadscore, Loadavg, Loaddate)
+    });
+};
+
+Load();
 CreateEditdiv();
