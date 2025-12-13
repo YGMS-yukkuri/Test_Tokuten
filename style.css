@@ -1,3 +1,11 @@
+* {
+    transition: background 0.5s ease-out;
+}
+
+*.dark {
+    transition: background 0.5s ease-out;
+    color: #FAFAFA;
+}
 body {
     width: 100vw;
     height: 100vh;
@@ -15,6 +23,12 @@ main {
 .inputBox input {
     width: 50%;
     height: 100%;
+}
+
+.inputBox.dark input {
+    width: 50%;
+    height: 100%;
+    background-color: #505050;
 }
 
 .inputBox {
@@ -37,6 +51,15 @@ main {
     height: 30px;
     border-radius: 100px;
     color: #000;
+}
+
+.button.dark button{
+    background-color: oklch(50% 0.035 240);
+    border: solid 2px #FAFAFA;
+    width: 100%;
+    height: 30px;
+    border-radius: 100px;
+    color: #FAFAFA;
 }
 
 .input {
@@ -75,6 +98,18 @@ main {
     gap: 10px;
 }
 
+.editInput.dark {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 10px;
+    border: 1px solid #ffffff;
+    background-color: oklch(50% 0.035 200);
+    gap: 10px;
+}
+
 .editInput select,
 .editInput button {
     height: 2.5em;
@@ -89,16 +124,39 @@ main {
     color: #000;
 }
 
+.editInput.dark select {
+    background-color: oklch(50% 0.035 240);
+    border: solid 2px #ffffff;
+    width: 30%;
+    text-align: center;
+    border-radius: 100px;
+    color: #ffffff;
+}
+
 .editInput button {
     background-color: oklch(90% 0.035 240);
     border: solid 2px #000;
-    width: 10%;
+    width: 15%;
     border-radius: 100px;
     color: #000;
 }
 
+.editInput.dark button {
+    background-color: oklch(50% 0.035 240);
+    border: solid 2px #ffffff;
+    width: 15%;
+    border-radius: 100px;
+    color: #ffffff;
+}
+
 .table {
     border: 1px solid #000;
+    width: 80%;
+    margin: auto;
+}
+
+.table.dark {
+    border: 1px solid #ffffff;
     width: 80%;
     margin: auto;
 }
@@ -111,12 +169,28 @@ td {
     padding: 5px;
 }
 
+th.dark,
+td.dark {
+    border: #ffffff 1px solid;
+    margin: 5px;
+    text-align: center;
+    padding: 5px;
+}
+
 .title {
     background-color: oklch(90% 0.035 200);
 }
 
 .rows {
     background-color: oklch(90% 0.035 240);
+}
+
+.title.dark {
+    background-color: oklch(50% 0.035 200);
+}
+
+.rows.dark {
+    background-color: oklch(50% 0.035 240);
 }
 
 .subject {
