@@ -15,12 +15,11 @@ let X;
 let Y;
 
 let isHolding = false;
+let isNight = false;
 
 document.addEventListener("mousemove", (e) => {
     X = e.clientX;
     Y = e.clientY;
-
-    console.log(X,Y,isHolding)
     if (isHolding) {
         const div = document.querySelector(".editElement");
         if (!div) return;
@@ -418,7 +417,25 @@ function removedata(i, name) {
     EditDiv.appendChild(InnerDiv)
 };
 
-
+function changeNight() {
+    const body = document.querySelector("body");
+    const input = document.querySelectorAll("input");
+    const all = document.querySelectorAll("*")
+    if (!isNight) {
+        isNight = true;
+        body.style.backgroundColor = "#303030"
+        all.forEach((elem) => {
+            elem.classList.add("dark")
+        })
+    }
+    else {
+        isNight = false;
+        body.style.backgroundColor = "#FFFFFF"
+        all.forEach((elem) => {
+            elem.classList.remove("dark")
+        })
+    }
+}
 
 CreateEditdiv();
 Load();
