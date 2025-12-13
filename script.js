@@ -11,6 +11,25 @@ let gapscore;
 let nowJST;
 let editingIndex = null;
 
+let X;
+let Y;
+
+let isHolding = false;
+
+document.addEventListener("mousemove", (e) => {
+    X = e.clientX;
+    Y = e.clientY;
+
+    console.log(X,Y,isHolding)
+    if (isHolding) {
+        const div = document.querySelector(".editElement");
+        if (!div) return;
+
+        div.style.top = `${Y}px`;
+        div.style.left = `${X}px`;
+    }
+})
+
 function register(Lsubject, Lscore, Lavg, Ldate) {
     if (Lsubject) {
         subject = Lsubject;
@@ -111,10 +130,6 @@ function search() {
 
             const EditBox = document.createElement("div");
             EditBox.classList.add("editing")
-            EditBox.style.display = "flex";
-            EditBox.style.flexDirection = "column";
-            EditBox.style.justifyContent = "center";
-            EditBox.style.alignItems = "center";
             EditBox.style.width = "100dvw";
             EditBox.style.height = "100dvh";
             EditBox.style.transform = "translate(-50%,-50%)";
@@ -124,14 +139,19 @@ function search() {
             EditBox.style.backgroundColor = "#00000040"
 
             const EditDiv = document.createElement("div");
+            EditDiv.classList.add("editElement")
             EditDiv.style.display = "flex"
-            EditDiv.style.width = "50%"
+            EditDiv.style.width = "70%"
             EditDiv.style.height = "50%"
             EditDiv.style.flexDirection = "column";
             EditDiv.style.justifyContent = "center";
             EditDiv.style.alignItems = "center";
-            EditDiv.style.backgroundColor = "rgba(255, 210, 210, 1)"
+            EditDiv.style.backgroundColor = "oklch(90% 0.035 240)"
             EditDiv.style.border = "1px solid #000"
+            EditDiv.style.position = "absolute"
+            EditDiv.style.top = "50%"
+            EditDiv.style.left = "50%"
+            EditDiv.style.transform = "translate(-50%,-50%)"
 
 
             const EditSubjectLabel = document.createElement("label");
@@ -165,6 +185,10 @@ function search() {
             SubmitButton.onclick = () => Editing();
             SubmitButton.textContent = "データを修正";
 
+            const DeleteButton = document.createElement("button");
+            DeleteButton.onclick = () => removedata(index, prevSubject);
+            DeleteButton.textContent = "データを削除";
+
             EditDiv.appendChild(EditSubjectLabel);
             EditDiv.appendChild(EditSubject);
             EditDiv.appendChild(EditScoreLabel);
@@ -172,9 +196,17 @@ function search() {
             EditDiv.appendChild(EditAvgLabel);
             EditDiv.appendChild(EditAvg);
             EditDiv.appendChild(SubmitButton);
+            EditDiv.appendChild(DeleteButton);
 
             EditBox.appendChild(EditDiv);
             document.querySelector("main").appendChild(EditBox);
+
+            EditDiv.addEventListener("mousedown", () => {
+                isHolding = true
+            })
+            EditDiv.addEventListener("mouseup", () => {
+                isHolding = false
+            })
         }
     })
 };
@@ -296,7 +328,7 @@ function Saving() {
     const scoreElems = document.querySelectorAll(".score");
     const avgElems = document.querySelectorAll(".avg");
     const dateElems = document.querySelectorAll(".date");
-    
+
     const data = [];
     subjectElems.forEach((elem, idx) => {
         data.push({
@@ -324,6 +356,69 @@ function Load() {
         register(Loadsubject, Loadscore, Loadavg, Loaddate)
     });
 };
+
+function removedata(i, name) {
+    const Table = document.querySelectorAll(".data");
+    const EditingDiv = document.querySelector(".editing");
+    const EditDiv = document.querySelector(".editElement");
+    while (EditDiv.firstChild) {
+        EditDiv.removeChild(EditDiv.firstChild)
+    }
+
+    const InnerDiv = document.createElement("div");
+    InnerDiv.style.width = "100%"
+    InnerDiv.style.height = "100%"
+    InnerDiv.style.display = "flex"
+    InnerDiv.style.flexDirection = "column"
+    InnerDiv.style.justifyContent = "center"
+    InnerDiv.style.alignItems = "center"
+    InnerDiv.style.scale = "1.3"
+
+    const ConfirmLabel = document.createElement("label");
+    ConfirmLabel.htmlFor = "ConfirmButton";
+    ConfirmLabel.textContent = "本当にデータを削除しますか？";
+
+    const ConfirmSubj = document.createElement("a")
+    ConfirmSubj.textContent = `「${name}」`
+
+    const ButtonDiv = document.createElement("div");
+    ButtonDiv.style.display = "flex";
+    ButtonDiv.style.gap = "10px";
+
+    const ConfirmButton = document.createElement("button");
+    ConfirmButton.id = "ConfirmButton";
+    ConfirmButton.textContent = "削除します";
+    ConfirmButton.style.backgroundColor = "oklch(90% 0.035 0)";
+    ConfirmButton.style.width = "100%";
+    ConfirmButton.onclick = () => {
+        Table[i].remove();
+        EditingDiv.remove();
+
+        Saving();
+        UpdateEditDiv();
+    }
+
+    const CancelButton = document.createElement("button");
+    CancelButton.id = "CancelButton";
+    CancelButton.textContent = "キャンセル";
+    CancelButton.style.backgroundColor = "oklch(90% 0.035 120)";
+    CancelButton.style.width = "100%";
+    CancelButton.onclick = () => {
+        EditingDiv.remove();
+        search();
+    }
+
+    ButtonDiv.appendChild(ConfirmButton)
+    ButtonDiv.appendChild(CancelButton)
+
+    InnerDiv.appendChild(ConfirmLabel)
+    InnerDiv.appendChild(ConfirmSubj)
+    InnerDiv.appendChild(ButtonDiv)
+
+    EditDiv.appendChild(InnerDiv)
+};
+
+
 
 CreateEditdiv();
 Load();
