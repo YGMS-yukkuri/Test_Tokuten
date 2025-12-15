@@ -18,17 +18,27 @@ let InnerX;
 let InnerY;
 
 let isHolding = false;
+let HoldingDelay = 50;
+
 let isNight = false;
 
 document.addEventListener("mousemove", (e) => {
     X = e.clientX;
     Y = e.clientY;
     if (isHolding) {
-        const div = document.querySelector(".editElement");
-        if (!div) return;
+        if (HoldingDelay < 0) {
+            const div = document.querySelector(".editElement");
+            if (!div) return;
 
-        div.style.top = `${Y}px`;
-        div.style.left = `${X}px`;
+            div.style.top = `${Y}px`;
+            div.style.left = `${X}px`;
+        }
+        else {
+            HoldingDelay--
+        }
+    }
+    else {
+        HoldingDelay = 50;
     }
 })
 
@@ -75,10 +85,10 @@ function register(Lsubject, Lscore, Lavg, Ldate) {
 
     const th = document.createElement("th");
     th.scope = "row";
-    
+
     th.classList.add("rows", "subject");
-    if(isNight) th.classList.add("dark");
-    
+    if (isNight) th.classList.add("dark");
+
     th.textContent = subject;
 
     const tdScore = document.createElement("td");
@@ -160,7 +170,8 @@ function search() {
             EditDiv.style.top = "50%"
             EditDiv.style.left = "50%"
             EditDiv.style.transform = "translate(-50%,-50%)"
-            if(isNight) {
+            EditDiv.style.userSelect = "none"
+            if (isNight) {
                 EditDiv.style.backgroundColor = "oklch(50% 0.035 240)"
                 EditDiv.style.border = "1px solid #FAFAFA"
                 EditDiv.style.color = "#FAFAFA"
