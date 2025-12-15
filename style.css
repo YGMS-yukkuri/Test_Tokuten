@@ -14,10 +14,15 @@ body {
 
 main {
     width: 100%;
-    height: 100%;
+    height: 95%;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+header {
+    width: 100%;
+    height: 5%;
 }
 
 .inputBox input {
@@ -215,4 +220,22 @@ td.dark {
     width: 100%;
     display: flex;
     justify-content: center;
+}
+
+.night button {
+    background-color: oklch(90% 0.035 240);
+    border: solid 2px #000;
+    width: 100%;
+    height: 30px;
+    border-radius: 100px;
+    color: #000;
+}
+
+.night.dark button {
+    background-color: oklch(50% 0.035 240);
+    border: solid 2px #FAFAFA;
+    width: 100%;
+    height: 30px;
+    border-radius: 100px;
+    color: #FAFAFA;
 }

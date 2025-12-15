@@ -14,6 +14,9 @@ let editingIndex = null;
 let X;
 let Y;
 
+let InnerX;
+let InnerY;
+
 let isHolding = false;
 let isNight = false;
 
@@ -68,29 +71,37 @@ function register(Lsubject, Lscore, Lavg, Ldate) {
 
     const tr = document.createElement("tr");
     tr.classList.add("data");
+    if (isNight) tr.classList.add("dark");
 
     const th = document.createElement("th");
     th.scope = "row";
+    
     th.classList.add("rows", "subject");
+    if(isNight) th.classList.add("dark");
+    
     th.textContent = subject;
 
     const tdScore = document.createElement("td");
-    tdScore.classList.add("score");
     tdScore.textContent = String(score);
+    tdScore.classList.add("score");
+    if (isNight) tdScore.classList.add("dark");
 
     const tdAverage = document.createElement("td");
-    tdAverage.classList.add("avg");
     tdAverage.textContent = String(avgscore);
+    tdAverage.classList.add("avg");
+    if (isNight) tdAverage.classList.add("dark");
 
     const tdGap = document.createElement("td");
     if (gapscore > 0) {
         gapscore = `+${String(gapscore)}`
     }
     tdGap.classList.add("gap");
+    if (isNight) tdGap.classList.add("dark");
     tdGap.textContent = gapscore;
 
     const tdTime = document.createElement("td");
     tdTime.classList.add("date");
+    if (isNight) tdTime.classList.add("dark");
     tdTime.textContent = nowJST;
 
     tr.appendChild(th);
@@ -145,12 +156,19 @@ function search() {
             EditDiv.style.flexDirection = "column";
             EditDiv.style.justifyContent = "center";
             EditDiv.style.alignItems = "center";
-            EditDiv.style.backgroundColor = "oklch(90% 0.035 240)"
-            EditDiv.style.border = "1px solid #000"
             EditDiv.style.position = "absolute"
             EditDiv.style.top = "50%"
             EditDiv.style.left = "50%"
             EditDiv.style.transform = "translate(-50%,-50%)"
+            if(isNight) {
+                EditDiv.style.backgroundColor = "oklch(50% 0.035 240)"
+                EditDiv.style.border = "1px solid #FAFAFA"
+                EditDiv.style.color = "#FAFAFA"
+            } else {
+                EditDiv.style.backgroundColor = "oklch(90% 0.035 240)"
+                EditDiv.style.border = "1px solid #000"
+                EditDiv.style.color = "#000"
+            }
 
 
             const EditSubjectLabel = document.createElement("label");
@@ -205,6 +223,10 @@ function search() {
             })
             EditDiv.addEventListener("mouseup", () => {
                 isHolding = false
+            })
+            EditDiv.addEventListener("mousemove", (e) => {
+                InnerX = e.clientX;
+                InnerY = e.clientY;
             })
         }
     })
@@ -308,6 +330,11 @@ function CreateEditdiv() {
         editSubjectOptions.value = element.textContent;
         editSubjectSelector.appendChild(editSubjectOptions);
     });
+
+    if (isNight) {
+        editSubjectSelector.classList.add("dark")
+        editInput.classList.add("dark")
+    }
 
     editInput.appendChild(editSubjectLabel);
     editInput.appendChild(editSubjectSelector);
