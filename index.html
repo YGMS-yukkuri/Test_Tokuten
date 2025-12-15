@@ -9,12 +9,17 @@
 </head>
 
 <body>
+    <header>
+        <div class="night">
+            <button onclick="changeNight()">ナイトモード切替</button>
+        </div>
+    </header>
     <main>
         <div class="inputBox">
             <div class="input">
                 <div>
                     <label for="subject">教科を入力</label>
-                    <input type="text" class="scoreInput" id="subject">
+                    <input type="text" class="scoreInput" id="subject" autocomplete="off">
                 </div>
                 <div>
                     <label for="score">得点を入力</label>
@@ -42,18 +47,13 @@
                         </tr>
                     </thead>
                     <tbody class="tbody">
-                        <tr class="data">
-                            <th scope="row" class="rows subject">言語文化</th>
-                            <td class="score">60</td>
-                            <td class="avg">55</td>
-                            <td class="gap">+5</td>
-                            <td class="date">2025/99/99</td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
             <div class="editBox"></div>
         </div>
+
+
     </main>
     <footer>
 
