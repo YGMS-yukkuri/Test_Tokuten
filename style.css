@@ -6,6 +6,7 @@
     transition: background 0.5s ease-out;
     color: #FAFAFA;
 }
+
 body {
     width: 100vw;
     height: 100vh;
@@ -14,26 +15,60 @@ body {
 
 main {
     width: 100%;
-    height: 95%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 header {
-    width: 100%;
+    width: 10%;
     height: 5%;
+    position: fixed;
+    top: 0%;
+    left: 0%;
 }
 
 .inputBox input {
-    width: 50%;
+    width: 40%;
     height: 100%;
 }
 
 .inputBox.dark input {
-    width: 50%;
+    width: 40%;
     height: 100%;
     background-color: #505050;
+}
+
+.input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3%;
+    gap: 10px;
+}
+
+.subjInput {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    height: 50%;
+    align-items: center;
+    justify-content: center;
+}
+
+.subjInput input {
+    width: 90%;
+    height: 100%;
+}
+
+.subjInput.dark input {
+    width: 90%;
+    height: 100%;
+}
+
+.input label span {
+    color: rgb(200, 0, 0);
 }
 
 .inputBox {
@@ -41,6 +76,7 @@ header {
     flex-direction: column;
     align-items: center;
     gap: 10px;
+    transition: all 0.5s ease-in-out;
 }
 
 .button {
@@ -58,7 +94,11 @@ header {
     color: #000;
 }
 
-.button.dark button{
+.button button:hover{
+    background-color: oklch(100% 0.035 240);
+}
+
+.button.dark button {
     background-color: oklch(50% 0.035 240);
     border: solid 2px #FAFAFA;
     width: 100%;
@@ -67,17 +107,16 @@ header {
     color: #FAFAFA;
 }
 
-.input {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 5%;
-    gap: 10px;
+.button.dark button:hover {
+    background-color: oklch(60% 0.035 240);
 }
+
 
 .center {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    margin: 3%;
 }
 
 .tableBox {
@@ -223,6 +262,9 @@ td.dark {
 }
 
 .night button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: oklch(90% 0.035 240);
     border: solid 2px #000;
     width: 100%;
@@ -238,4 +280,16 @@ td.dark {
     height: 30px;
     border-radius: 100px;
     color: #FAFAFA;
+}
+
+.night button img {
+    height: 100%;
+}
+
+.add {
+    width: 100%;
+    height: 2em;
+    display: flex;
+    justify-content: center;
+    padding: 5px;
 }
