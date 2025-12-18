@@ -18,7 +18,7 @@ let InnerX;
 let InnerY;
 
 let isHolding = false;
-let HoldingDelay = 50;
+let HoldingDelay = 20;
 
 let isNight = false;
 
@@ -38,7 +38,7 @@ document.addEventListener("mousemove", (e) => {
         }
     }
     else {
-        HoldingDelay = 50;
+        HoldingDelay = 20;
     }
 })
 
@@ -461,6 +461,7 @@ function changeNight() {
     const all = document.querySelectorAll("*")
     if (!isNight) {
         isNight = true;
+        localStorage.setItem("dark",true)
         body.style.backgroundColor = "#303030"
         all.forEach((elem) => {
             elem.classList.add("dark")
@@ -468,12 +469,17 @@ function changeNight() {
     }
     else {
         isNight = false;
+        localStorage.setItem("dark", false)
         body.style.backgroundColor = "#FFFFFF"
         all.forEach((elem) => {
             elem.classList.remove("dark")
         })
     }
 }
+
+if (localStorage.getItem("dark") === "true") {
+    changeNight()
+};
 
 CreateEditdiv();
 Load();
