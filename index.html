@@ -11,29 +11,10 @@
 <body>
     <header>
         <div class="night">
-            <button onclick="changeNight()">ナイトモード切替</button>
+            <button onclick="changeNight()"><span>ライト/ダーク</span></button>
         </div>
     </header>
     <main>
-        <div class="inputBox">
-            <div class="input">
-                <div>
-                    <label for="subject">教科を入力</label>
-                    <input type="text" class="scoreInput" id="subject" autocomplete="off">
-                </div>
-                <div>
-                    <label for="score">得点を入力</label>
-                    <input type="number" class="scoreInput" id="score" min="0">
-                </div>
-                <div>
-                    <label for="avgscore">平均点を入力</label>
-                    <input type="number" class="scoreInput" id="avgscore" min="0">
-                </div>
-            </div>
-            <div class="button">
-                <button type="button" onclick="register()">データを登録</button>
-            </div>
-        </div>
         <div class="center">
             <div class="tableBox">
                 <table class="table">
@@ -49,7 +30,29 @@
                     <tbody class="tbody">
                     </tbody>
                 </table>
+                <div class="inputBox">
+                    <div class="input">
+                        <div class="subjInput">
+                            <label for="subject">教科を入力<span>*</span></label>
+                            <input type="text" class="scoreInput" id="subject" autocomplete="off">
+                        </div>
+                        <div>
+                            <div>
+                                <label for="score">得点を入力<span>*</span></label>
+                                <input type="number" class="scoreInput" id="score" min="0">
+                            </div>
+                            <div>
+                                <label for="avgscore">平均を入力</label>
+                                <input type="number" class="scoreInput" id="avgscore" min="0">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button">
+                        <button type="button" onclick="register()">データを登録</button>
+                    </div>
+                </div>
             </div>
+
             <div class="editBox"></div>
         </div>
 
