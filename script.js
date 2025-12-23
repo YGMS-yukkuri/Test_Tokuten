@@ -481,5 +481,9 @@ if (localStorage.getItem("dark") === "true") {
     changeNight()
 };
 
+function allReset() {
+    localStorage.clear()
+}
+
 CreateEditdiv();
 Load();
