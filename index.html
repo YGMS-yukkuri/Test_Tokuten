@@ -30,13 +30,16 @@
                     <tbody class="tbody">
                     </tbody>
                 </table>
-                <div class="inputBox">
+                <div class="button">
+                    <button type="button" onclick="showRegister()">データを登録</button>
+                </div>
+                <div class="inputBox" style="display: none;">
                     <div class="input">
                         <div class="subjInput">
                             <label for="subject">教科を入力<span>*</span></label>
                             <input type="text" class="scoreInput" id="subject" autocomplete="off">
                         </div>
-                        <div>
+                        <div class="numberInput">
                             <div>
                                 <label for="score">得点を入力<span>*</span></label>
                                 <input type="number" class="scoreInput" id="score" min="0">
@@ -46,11 +49,12 @@
                                 <input type="number" class="scoreInput" id="avgscore" min="0">
                             </div>
                         </div>
+                        <div class="button">
+                            <button type="button" onclick="register()">データを登録</button>
+                            <button type="button" onclick="unshowRegister()">閉じる</button>
+                        </div>
                     </div>
-                    <div class="button">
-                        <button type="button" onclick="register()">データを登録</button>
-                    </div>
-                </div>
+            </div>
             </div>
 
             <div class="editBox"></div>
