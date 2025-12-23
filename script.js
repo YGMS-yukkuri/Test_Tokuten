@@ -1,6 +1,7 @@
 const subjectBox = document.getElementById("subject");
 const scoreBox = document.getElementById("score");
 const avgscoreBox = document.getElementById("avgscore");
+const inputDisplay = document.querySelector(".inputBox");
 
 const tbody = document.querySelector(".tbody");
 
@@ -41,6 +42,14 @@ document.addEventListener("mousemove", (e) => {
         HoldingDelay = 20;
     }
 })
+
+function unshowRegister() {
+    inputDisplay.style.display = "none";
+}
+
+function showRegister() {
+    inputDisplay.style.display = "flex";
+}
 
 function register(Lsubject, Lscore, Lavg, Ldate) {
     if (Lsubject) {
@@ -125,6 +134,8 @@ function register(Lsubject, Lscore, Lavg, Ldate) {
     subjectBox.value = "";
     scoreBox.value = "";
     avgscoreBox.value = "";
+
+    inputDisplay.style.display = "none";
 
     UpdateEditDiv();
     Saving();
@@ -375,6 +386,7 @@ function Saving() {
             date: dateElems[idx].textContent
         })
     })
+    localStorage.removeItem("Datas");
     localStorage.setItem("Datas", JSON.stringify(data));
     console.log(JSON.parse(localStorage.getItem("Datas")));
 };
