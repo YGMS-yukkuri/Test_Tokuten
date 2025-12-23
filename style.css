@@ -64,6 +64,7 @@ header {
 }
 
 
+
 .subjInput {
     display: flex;
     flex-direction: column;
@@ -106,11 +107,45 @@ header {
     background-color: #0000008f;
 }
 
+.button1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    height: 50px;
+}
+
 .button {
     display: flex;
     align-items: center;
     width: 30%;
     height: 50%;
+}
+
+.button1 button {
+    background-color: oklch(90% 0.035 240);
+    border: solid 2px #000;
+    width: 100%;
+    height: 30px;
+    border-radius: 100px;
+    color: #000;
+}
+
+.button1 button:hover {
+    background-color: oklch(100% 0.035 240);
+}
+
+.button1.dark button {
+    background-color: oklch(50% 0.035 240);
+    border: solid 2px #FAFAFA;
+    width: 100%;
+    height: 30px;
+    border-radius: 100px;
+    color: #FAFAFA;
+}
+
+.button1.dark button:hover {
+    background-color: oklch(60% 0.035 240);
 }
 
 .button button {
@@ -122,7 +157,7 @@ header {
     color: #000;
 }
 
-.button button:hover{
+.button button:hover {
     background-color: oklch(100% 0.035 240);
 }
 
@@ -148,6 +183,9 @@ header {
 }
 
 .tableBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 40%;
     height: 100%;
 }
